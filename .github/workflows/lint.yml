@@ -1,0 +1,49 @@
+name: Linting
+run-name: ${{ github.actor }} is Linting on ${{ github.ref }}
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - '**.ts'
+      - '**.js'
+      - 'package.json'
+  pull_request:
+    branches: [master]
+    paths:
+      - '**.ts'
+      - '**.js'
+      - 'package.json'
+
+jobs:
+  linting:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      matrix:
+        pnpm: [9.12.3]
+        node: [20]
+
+    name: PNPM ${{ matrix.pnpm }}
+
+    steps:
+      - name: 🌱 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📥 Setup PNPM
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ matrix.pnpm }}
+
+      - name: 🛒 Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+
+      - name: ⚡ Install dependencies (with pnpm)
+        run: pnpm install
+
+      - name: 🪵 Lint
+        run: pnpm run lint
