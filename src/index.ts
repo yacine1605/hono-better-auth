@@ -3,7 +3,7 @@ import { cors } from "hono/cors";
 import 'dotenv/config';
 import { auth } from './auth';
 
-export const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
+const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(',') || [];
 
 const app = new Hono()
 
