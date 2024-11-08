@@ -3,7 +3,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "./db"; // your drizzle instance
 import * as authSchema from "./db/auth-schema";
 
-const providers = ["discord", "google", "github", "microsoft", "twitch"];
+const providers = ["discord", "google", "github", "microsoft", "twitch", "gitlab"];
 
 const configuredProviders = providers.reduce<
 	Record<string, { clientId: string; clientSecret: string }>
