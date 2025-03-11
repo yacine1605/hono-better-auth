@@ -23,7 +23,18 @@ const providers = [
 ];
 
 export const configuredProviders = providers.reduce<
-	Record<string, { clientId: string; clientSecret: string, appBundleIdentifier?: string, tenantId?: string, requireSelectAccount?: boolean, clientKey?: string, issuer?: string }>
+	Record<
+		string,
+		{
+			clientId: string;
+			clientSecret: string;
+			appBundleIdentifier?: string;
+			tenantId?: string;
+			requireSelectAccount?: boolean;
+			clientKey?: string;
+			issuer?: string;
+		}
+	>
 >((acc, provider) => {
 	const id = process.env[`${provider.toUpperCase()}_CLIENT_ID`];
 	const secret = process.env[`${provider.toUpperCase()}_CLIENT_SECRET`];
@@ -31,7 +42,8 @@ export const configuredProviders = providers.reduce<
 		acc[provider] = { clientId: id, clientSecret: secret };
 	}
 	if (provider === "apple") {
-		const bundleId = process.env[`${provider.toUpperCase()}_APP_BUNDLE_IDENTIFIER`];
+		const bundleId =
+			process.env[`${provider.toUpperCase()}_APP_BUNDLE_IDENTIFIER`];
 		if (bundleId && bundleId.length > 0) {
 			acc[provider].appBundleIdentifier = bundleId;
 		}
