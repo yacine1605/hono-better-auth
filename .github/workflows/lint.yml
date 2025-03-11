@@ -34,7 +34,7 @@ jobs:
       - name: 📥 Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          version: ${{ matrix.bun }}
+          bun-version: ${{ matrix.bun }}
 
       - name: 🛒 Setup Node
         uses: actions/setup-node@v3
