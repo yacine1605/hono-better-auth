@@ -22,28 +22,28 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        pnpm: [9.12.3]
+        bun: [1.2.1]
         node: [20]
 
-    name: PNPM ${{ matrix.pnpm }}
+    name: BUN ${{ matrix.bun }}
 
     steps:
       - name: 🌱 Checkout code
         uses: actions/checkout@v4
 
-      - name: 📥 Setup PNPM
-        uses: pnpm/action-setup@v4
+      - name: 📥 Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: ${{ matrix.pnpm }}
+          version: ${{ matrix.bun }}
 
       - name: 🛒 Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
-          cache: 'pnpm'
+          cache: 'bun'
 
-      - name: ⚡ Install dependencies (with pnpm)
-        run: pnpm install
+      - name: ⚡ Install dependencies (with bun)
+        run: bun install
 
       - name: 🪵 Lint
-        run: pnpm run lint
+        run: bun run lint
