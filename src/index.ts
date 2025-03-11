@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import "dotenv/config";
-import { auth } from "./auth";
+import { auth, configuredProviders } from "./auth";
 
 const allowedOrigins = process.env.ALLOWED_ORIGINS?.split(",") || [];
 
@@ -28,11 +28,20 @@ app.use(
 	}),
 );
 
+app.on(
+	["GET"],
+	"/api/auth-providers",
+	(c) => {
+		return c.json(Object.keys(configuredProviders));
+	}
+);
+
 app.on(["POST", "GET"], "/api/auth/**", (c) => {
 	return auth.handler(c.req.raw);
 });
 
 export default {
-	port: 8558,
+	port: process.env.APP_PORT || 8558,
+	host: process.env.APP_HOST || undefined,
 	fetch: app.fetch,
 };

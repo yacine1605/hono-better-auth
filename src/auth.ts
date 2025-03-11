@@ -1,11 +1,11 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { db } from "./db"; // your drizzle instance
+import { db } from "./db";
 import * as authSchema from "./db/auth-schema";
 
 const providers = ["discord", "google", "github", "microsoft", "twitch", "gitlab"];
 
-const configuredProviders = providers.reduce<
+export const configuredProviders = providers.reduce<
 	Record<string, { clientId: string; clientSecret: string }>
 >((acc, provider) => {
 	const id = process.env[`${provider.toUpperCase()}_CLIENT_ID`];
@@ -27,7 +27,7 @@ export const auth = betterAuth({
 	},
 	trustedOrigins: process.env.ALLOWED_ORIGINS?.split(",") || [],
 	database: drizzleAdapter(db, {
-		provider: "sqlite", // or "mysql", "sqlite"
+		provider: "sqlite",
 		schema: authSchema,
 	}),
 });
