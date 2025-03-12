@@ -1,14 +1,13 @@
-import 'dotenv/config';
-import { defineConfig } from 'drizzle-kit';
+import "dotenv/config";
+import { defineConfig } from "drizzle-kit";
 
-const authToken = process.env.TURSO_DB_AUTH_TOKEN;
+//const authToken = process.env.TURSO_DB_AUTH_TOKEN;
 
 export default defineConfig({
-  out: './drizzle',
-  schema: './src/db/auth-schema.ts',
-  dialect: authToken ? 'turso' : 'sqlite',
+  out: "./drizzle",
+  schema: "./src/db/schema",
+  dialect: "postgresql",
   dbCredentials: {
-    url: process.env.TURSO_DB_URL || 'file:dev.db',
-    authToken: process.env.TURSO_DB_AUTH_TOKEN,
+    url: process.env.DATABASE_URL || "file:dev.db",
   },
 });

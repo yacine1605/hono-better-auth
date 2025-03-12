@@ -1,9 +1,12 @@
-import { drizzle } from "drizzle-orm/libsql";
-
-// You can specify any property from the libsql connection options
-export const db = drizzle({
-	connection: {
-		url: process.env.TURSO_DB_URL || "file:dev.db",
-		authToken: process.env.TURSO_DB_AUTH_TOKEN || undefined,
-	},
-});
+//import "dotenv/config";
+//// db.ts
+//import { drizzle } from "drizzle-orm/node-postgres";
+//import { Pool } from "pg";
+//
+//// Load environment variables first
+//const pool = new Pool({
+//  connectionString: "postgres://postgres:yacine@localhost:5432/postgres",
+//});
+//
+//export const db = drizzle(pool);
+//console.log("connected to db", process.env.DATABASE_URL);
